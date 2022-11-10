@@ -19,42 +19,6 @@ const userRegistration = async (req, res) => {
     try {
         let userData = req.body
 
-        ///<--------------req validation-------------------------------------------->
-        if (Object.keys(userData).length == 0) {
-            return res.status(400).send({ status: false, msg: "Request Cannot Be Empty" })
-        }
-
-        if (!isValid(userData.name)) {
-            return res.status(400).send({ status: false, message: "name is required" });
-        }
-
-        if (!isValid(userData.email)) {
-            return res.status(400).send({ status: false, message: "email is required" });
-        }
-
-        if (!emailRegex.test(userData.email.trim())) {
-            return res.status(400).send({ status: false, message: "email is invalid" })
-        }
-
-        if (!(/^[A-Za-z ]+$/.test(userData.name))) {
-            return res.status(400).send({ status: false, message: "name should be in alphabetic character" });
-        }
-
-        if (!isValid(userData.password)) {
-            return res
-                .status(400)
-                .send({ status: false, message: "password is required" })
-        }
-
-        ////<----------------------- Password validation ------------------------------->
-    
-            if (!/^[A-Za-z\W0-9]{8,15}$/.test(userData.password.trim())) {
-                return res
-                .status(400)
-                .send({ status: false, message: "password should be 8 to 15 character long" })
-            }
-        
-
         const salt = await bcrypt.genSalt(10)
         userData.password = await bcrypt.hash(userData.password, salt)
 
@@ -73,11 +37,6 @@ const userRegistration = async (req, res) => {
 const userLogin = async function (req, res) {
     try {
         const data = req.body
-
-        //----------------------------- Validating body -----------------------------//
-        if (Object.keys(data).length==0) {
-            return res.status(400).send({ status: false, message: "Please Enter Login Credentials..." })
-        }
 
         const email = data.email
         const password = data.password
