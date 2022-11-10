@@ -75,7 +75,7 @@ const userLogin = async function (req, res) {
         const data = req.body
 
         //----------------------------- Validating body -----------------------------//
-        if (!isValidBody(data)) {
+        if (Object.keys(data).length==0) {
             return res.status(400).send({ status: false, message: "Please Enter Login Credentials..." })
         }
 
@@ -94,7 +94,7 @@ const userLogin = async function (req, res) {
         if (!isValid(password)) {
             return res.status(400).send({ status: false, message: "Please enter Password" })
         }
-        if (!!/^[A-Za-z\W0-9]{8,15}$/.test(password.trim())) {
+        if (!/^[A-Za-z\W0-9]{8,15}$/.test(password.trim())) {
             return res.status(400).send({ status: false, message: "password should be between 8 to 15" })
         }
 
