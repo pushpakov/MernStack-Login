@@ -12,7 +12,6 @@ const authentication = async function (req, res, next) {
         if (!token) {
             return res.status(401).send({ status: false, message: "login is required" })
         }
-
         let splitToken = token.split(" ")
 
         //----------------------------- Token Verification -----------------------------//
