@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const studentSchema = mongoose.Schema({
+    userId: {
+        type: ObjectId,
+        required:true,
+        ref: 'User'
+    },
     name: {
         type: String,
         required: true
@@ -17,7 +23,7 @@ const studentSchema = mongoose.Schema({
         type: Boolean,
         default: false
     }
-},{timestamps: true});
+}, { timestamps: true });
 
 
 module.exports = mongoose.model("Student", studentSchema)
