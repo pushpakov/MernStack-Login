@@ -16,7 +16,7 @@ const authentication = async function (req, res, next) {
         let splitToken = token.split(" ")
 
         //----------------------------- Token Verification -----------------------------//
-        jwt.verify(splitToken[1], "doneByAnil", (error, decodedtoken) => {
+        jwt.verify(splitToken[1], "done login", (error, decodedtoken) => {
             if (error) {
                 const message =
                     error.message === "jwt expired" ? "Token is expired, Please login again" : "Token is invalid, Please recheck your Token"

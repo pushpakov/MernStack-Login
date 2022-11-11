@@ -113,8 +113,8 @@ const userLogin = async function (req, res) {
         //----------------------------- Token Generation -----------------------------//
         const token = jwt.sign({
             userId: user._id.toString(),
-            project: "mock_assignment",
-        }, "doneByAnil")
+            project: "login_task",
+        }, "done login")
 
         res.setHeader("Authorization", token)
         const output = {
